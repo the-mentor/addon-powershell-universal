@@ -1,0 +1,11 @@
+{
+  "squash": false,
+  "build_from": {
+    "aarch64": "ironmansoftware/universal:1.4.2-ubunutu-18.04",
+    "amd64": "ironmansoftware/universal:1.4.2-ubunutu-18.04",
+    "armhf": "ironmansoftware/universal:1.4.2-ubunutu-18.04",
+    "armv7": "ironmansoftware/universal:1.4.2-ubunutu-18.04",
+    "i386": "ironmansoftware/universal:1.4.2-ubunutu-18.04"
+  },
+  "args": {}
+}
