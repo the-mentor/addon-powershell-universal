@@ -1,10 +1,10 @@
 #!/usr/bin/with-contenv bashio
 # ==============================================================================
-# Home Assistant Community Add-on: Example
-# Runs example2 script
+# Home Assistant Community Add-on: PowerShell Universal
+# Runs PowerShell Universal 
 # ==============================================================================
 
 
-bashio::log.info "Starting Example2..."
+bashio::log.info "Starting PowerShell Universal ..."
 
-exec /usr/bin/example2.sh
+exec ./home/Universal/Universal.Server

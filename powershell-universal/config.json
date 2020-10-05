@@ -3,7 +3,7 @@
   "version": "1.4.2",
   "slug": "powershell",
   "description": "PowerShell Universal add-on by Community Home Assistant Add-ons",
-  "url": "https://github.com/hassio-addons/addon-example",
+  "url": "https://github.com/the-mentor/addon-powershell-universal",
   "startup": "application",
   "init": false,
   "webui": "[PROTO:ssl]://[HOST]:[PORT:80]",
@@ -22,7 +22,7 @@
   "map": ["media:rw", "share:rw", "ssl"],
   "boot": "auto",
   "options": {
-  "log_level": "info",
+	"log_level": "info",
     "ssl": false,
     "certfile": "fullchain.pem",
     "keyfile": "privkey.pem"
