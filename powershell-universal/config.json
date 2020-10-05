@@ -13,7 +13,7 @@
   "homeassistant": "0.91.4",
   "ingress": true,
   "ingress_port": 5000,
-  "panel_icon": "mdi:chat",
+  "panel_icon": "mdi:powershell",
   "ports": {
     "80/tcp": null,
     "5000/tcp": 5000
