@@ -1,20 +1,54 @@
-ARG BUILD_FROM=ironmansoftware/universal:1.4.2-ubunutu-18.04
+ARG BUILD_FROM=hassioaddons/ubuntu-base:5.2.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # Copy root filesystem
 COPY rootfs /
-
-# Setup base
-#RUN apk add --no-cache \
-#    coreutils=8.32-r0 \
-#    wget=1.20.3-r1
 
 # Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
 ARG BUILD_VERSION
+ARG PACKAGE_URL=https://imsreleases.blob.core.windows.net/universal/production/${BUILD_VERSION}/Universal.linux-x64.${BUILD_VERSION}.zip
+ARG DEBIAN_FRONTEND=noninteractive 
+
+# Setup base
+# Install dependencies and clean up
+RUN apt-get update \
+    && apt-get install -y apt-utils 2>&1 | grep -v "debconf: delaying package configuration, since apt-utils is not installed" \
+    && apt-get install --no-install-recommends -y \
+    # curl is required to grab the Linux package
+        curl \
+    # less is required for help in powershell
+        less \
+    # requied to setup the locale
+        locales \
+    # required for SSL
+        ca-certificates \
+        gss-ntlmssp \
+    # PowerShell remoting over SSH dependencies
+        openssh-client \
+        unzip \
+	# Download the PowerShell Deb and Install it
+	#&& wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb \
+	&& curl -sSL https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb  -o /tmp/packages-microsoft-prod.deb \
+	&& apt-get install -y /tmp/packages-microsoft-prod.deb \
+	&& apt-get update \ 
+	#&& add-apt-repository -y universe \ 
+	&& apt-get install -y powershell \ 
+    # Download the Linux package and save it
+    && echo ${PACKAGE_URL} \
+    && curl -sSL ${PACKAGE_URL} -o /tmp/universal.zip \
+    && unzip /tmp/universal.zip -d ./home/Universal || : \
+    # remove powershell package
+    && rm /tmp/universal.zip \
+    && chmod +x ./home/Universal/Universal.Server
+
+
 
 # Labels
 LABEL \
@@ -41,4 +75,7 @@ ENV Data__RepositoryPath /share/powershell-universal/Repository
 ENV Data__ConnectionString /share/powershell-universal/database.db
 ENV UniversalDashboard__AssetsFolder /share/powershell-universal/UniversalDashboard 
 ENV Logging__Path /share/powershell-universal/logs/log.txt
-ENTRYPOINT ["./home/Universal/Universal.Server"]
+ENV POWERSHELL_TELEMETRY_OPTOUT 1
+
+#EXPOSE 5000
+#ENTRYPOINT ["./home/Universal/Universal.Server"]

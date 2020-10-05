@@ -1,6 +1,6 @@
 {
   "name": "PowerShell Universal",
-  "version": "dev",
+  "version": "1.4.2",
   "slug": "powershell",
   "description": "PowerShell Universal add-on by Community Home Assistant Add-ons",
   "url": "https://github.com/hassio-addons/addon-example",
@@ -21,8 +21,6 @@
   "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
   "map": ["media:rw", "share:rw", "ssl"],
   "boot": "auto",
-  "hassio_api": true,
-  "hassio_role": "default",
   "options": {
   "log_level": "info",
     "ssl": false,
