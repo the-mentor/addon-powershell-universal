@@ -19,7 +19,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Setup base
 # Install dependencies and clean up
 RUN apt-get update \
-    && apt-get install -y apt-utils 2>&1 | grep -v "debconf: delaying package configuration, since apt-utils is not installed" \
     && apt-get install --no-install-recommends -y \
     # less is required for help in powershell
         less=487-0.1+b1 \
