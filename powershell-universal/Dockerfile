@@ -36,7 +36,7 @@ RUN apt-get update \
         unzip \
 	# Download the PowerShell Deb and Install it
 	#&& wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb \
-	&& curl -sSL https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb  -o /tmp/packages-microsoft-prod.deb \
+	&& curl -sSL https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb  -o /tmp/packages-microsoft-prod.deb \
 	&& apt-get install -y /tmp/packages-microsoft-prod.deb \
 	&& apt-get update \ 
 	#&& add-apt-repository -y universe \ 
