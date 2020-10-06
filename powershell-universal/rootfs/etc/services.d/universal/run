@@ -7,4 +7,10 @@
 
 bashio::log.info "Starting PowerShell Universal ..."
 
+export Data__RepositoryPath=/share/powershell-universal/Repository
+export Data__ConnectionString=/share/powershell-universal/database.db
+export UniversalDashboard__AssetsFolder=/share/powershell-universal/UniversalDashboard 
+export Logging__Path=/share/powershell-universal/logs/log.txt
+export POWERSHELL_TELEMETRY_OPTOUT=1
+
 exec /home/Universal/Universal.Server
