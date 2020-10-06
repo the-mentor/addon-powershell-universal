@@ -45,8 +45,6 @@ RUN apt-get update \
     && rm /tmp/universal.zip \
     && chmod +x ./home/Universal/Universal.Server
 
-
-
 # Labels
 LABEL \
     io.hass.name="PowerShell Universal" \
@@ -66,13 +64,3 @@ LABEL \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
-
-#Environment Variables 
-ENV Data__RepositoryPath /share/powershell-universal/Repository
-ENV Data__ConnectionString /share/powershell-universal/database.db
-ENV UniversalDashboard__AssetsFolder /share/powershell-universal/UniversalDashboard 
-ENV Logging__Path /share/powershell-universal/logs/log.txt
-ENV POWERSHELL_TELEMETRY_OPTOUT 1
-
-#EXPOSE 5000
-#ENTRYPOINT ["./home/Universal/Universal.Server"]
