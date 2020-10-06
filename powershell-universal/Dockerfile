@@ -19,20 +19,17 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Setup base
 # Install dependencies and clean up
 RUN apt-get update \
-    && apt-get install -y apt-utils 2>&1 | grep -v "debconf: delaying package configuration, since apt-utils is not installed" \
     && apt-get install --no-install-recommends -y \
-    # curl is required to grab the Linux package
-        curl \
     # less is required for help in powershell
-        less \
+        less=487-0.1+b1 \
     # requied to setup the locale
-        locales \
+        locales=2.28-10 \
     # required for SSL
-        ca-certificates \
-        gss-ntlmssp \
+        ca-certificates=20200601~deb10u1 \
+        gss-ntlmssp=0.7.0-4 \
     # PowerShell remoting over SSH dependencies
-        openssh-client \
-        unzip \
+        openssh-client=1:7.9p1-10+deb10u2 \
+        unzip=6.0-23+deb10u1 \
 	# Download the PowerShell Deb and Install it
 	#&& wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb \
 	&& curl -sSL https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb  -o /tmp/packages-microsoft-prod.deb \
