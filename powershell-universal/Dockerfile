@@ -5,9 +5,6 @@ FROM ${BUILD_FROM}
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Copy root filesystem
-COPY rootfs /
-
 # Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
@@ -30,6 +27,8 @@ RUN apt-get update \
     # PowerShell remoting over SSH dependencies
         openssh-client=1:7.9p1-10+deb10u2 \
         unzip=6.0-23+deb10u1 \
+    # Install Nginx
+        nginx=1.14.2-2+deb10u3 \
 	# Download the PowerShell Deb and Install it
 	#&& wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb \
 	&& curl -sSL https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb  -o /tmp/packages-microsoft-prod.deb \
@@ -37,6 +36,12 @@ RUN apt-get update \
 	&& apt-get update \ 
 	#&& add-apt-repository -y universe \ 
 	&& apt-get install -y powershell \ 
+    && apt-get clean \
+    && rm -f -r \
+        /etc/nginx \
+    \
+    && mkdir -p /var/log/nginx \
+    && touch /var/log/nginx/error.log \
     # Download the Linux package and save it
     && echo ${PACKAGE_URL} \
     && curl -sSL ${PACKAGE_URL} -o /tmp/universal.zip \
@@ -44,6 +49,9 @@ RUN apt-get update \
     # remove powershell package
     && rm /tmp/universal.zip \
     && chmod +x ./home/Universal/Universal.Server
+
+# Copy root filesystem
+COPY rootfs /
 
 # Labels
 LABEL \
