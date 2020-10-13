@@ -13,4 +13,7 @@ export UniversalDashboard__AssetsFolder=/share/powershell-universal/UniversalDas
 export Logging__Path=/share/powershell-universal/logs/log.txt
 export POWERSHELL_TELEMETRY_OPTOUT=1
 
+#Create PowerShell Modules Directory if it doesnt exist
+[ ! -d "/share/powershell-universal/PSModules" ] && mkdir /share/powershell-universal/PSModules
+
 exec /home/Universal/Universal.Server
