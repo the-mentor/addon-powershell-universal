@@ -35,7 +35,7 @@ RUN apt-get update \
 	&& apt-get install -y /tmp/packages-microsoft-prod.deb \
 	&& apt-get update \ 
 	#&& add-apt-repository -y universe \ 
-	&& apt-get install -y powershell \ 
+	&& apt-get install -y powershell=7.0.3-1.debian.10 \ 
     && apt-get clean \
     && rm -f -r \
         /etc/nginx \
