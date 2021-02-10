@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/debian-base:3.2.2
+ARG BUILD_FROM=hassioaddons/debian-base:3.2.3
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -22,11 +22,11 @@ RUN apt-get update \
     # requied to setup the locale
         locales=2.28-10 \
     # required for SSL
-        ca-certificates=20200601~deb10u1 \
+        ca-certificates=20200601~deb10u2 \
         gss-ntlmssp=0.7.0-4 \
     # PowerShell remoting over SSH dependencies
         openssh-client=1:7.9p1-10+deb10u2 \
-        unzip=6.0-23+deb10u1 \
+        unzip=6.0-23+deb10u2 \
     # Install Nginx
         nginx=1.14.2-2+deb10u3 \
 	# Download the PowerShell Deb and Install it
